@@ -1,41 +1,44 @@
-Methodology
-Imported the UK-based e-commerce dataset containing 541,909 transactions and 8 features using pandas with appropriate encoding.
-Conducted an initial data audit to examine structure, data types, and missing values, identifying 135,080 missing CustomerID entries (~25% of total data).
-Converted the InvoiceDate column into datetime format to enable accurate time-series analysis.
-Identified cancelled transactions using Invoice numbers starting with "C" and separated them for return analysis.
-Removed records with negative Quantity values from the main dataset to ensure sales metrics reflect actual purchases.
-Created a clean subset for customer-level analysis by excluding rows with missing CustomerID.
-Engineered a key business metric:
-Revenue = Quantity × UnitPrice
-Performed aggregation using groupby() to derive insights across multiple dimensions:
-Customer-level (Total Revenue, Order Count, Average Order Value)
-Country-level (Revenue contribution, order distribution)
-Product-level (Top-selling items by volume)
-Built clear and interpretable visualizations using matplotlib and seaborn, including:
-Monthly revenue trends
-Top-performing countries
-Best-selling products
-Return rate by country
-Calculated return rates by comparing cancelled transactions against total orders per country.
-Extended the analysis with advanced metrics such as top customer behavior and average basket size.
-Business Insights
+## Methodology
 
-1. Strong Dependence on the UK Market
-The United Kingdom overwhelmingly dominates sales, contributing approximately 80% or more of total revenue.
-→ While this highlights a strong domestic market presence, it also exposes the business to geographic concentration risk. Expanding into underperforming international markets presents a clear growth opportunity.
+- Loaded the `ecommerce_data.csv` dataset using **pandas** (`541,909 rows × 8 columns`)
+- Inspected dataset structure and identified missing values, including **135,080 missing CustomerID records (~25%)**
+- Converted `InvoiceDate` to datetime format for accurate time-series analysis
+- Identified cancelled transactions using InvoiceNo starting with `"C"` and separated them for return analysis
+- Removed negative `Quantity` values from the main dataset to ensure only valid sales are analyzed
+- Created a clean dataset for customer-level analysis by excluding missing `CustomerID` values
+- Engineered a new feature: `Revenue = Quantity × UnitPrice`
+- Performed aggregations using `groupby()` for customer, country, and product-level insights
+- Built visualizations to analyze trends, patterns, and comparisons
+- Calculated return rates by comparing cancelled vs total orders across countries
 
-2. Significant Loss of Customer-Level Visibility
-Approximately 135,080 transactions (~25% of the dataset) lack CustomerID information, restricting the ability to perform accurate customer segmentation and lifetime value analysis.
-→ Strengthening data collection mechanisms (e.g., mandatory accounts, improved CRM systems) would significantly enhance data-driven decision-making.
+---
 
-3. Clear Seasonal Sales Pattern (Q4 Surge)
-Revenue trends reveal pronounced peaks during November and December, aligning with holiday shopping behavior.
-→ Strategic planning around Q4—such as inventory scaling, targeted marketing campaigns, and logistics optimization—can substantially boost annual performance.
+## Business Insights
 
-4. Elevated Return Rates in Specific Regions
-Return analysis indicates that certain countries experience disproportionately high cancellation rates compared to others.
-→ This suggests potential issues in logistics, product-market fit, or customer expectations. Addressing these gaps can reduce revenue leakage and improve customer satisfaction.
+**UK Market Dominance:**  
+The United Kingdom generates approximately **80%+ of total revenue**, significantly outperforming all other countries.  
+→ Heavy reliance on a single market introduces risk, but also highlights strong domestic performance. Expanding internationally can drive future growth.
 
-5. Revenue Concentration Among Top Customers
-A relatively small segment of customers contributes a disproportionately large share of total revenue, reflecting a classic Pareto (80/20) distribution.
-→ Retention strategies such as loyalty programs, personalized offers, and VIP engagement should be prioritized to maximize long-term profitability.
+---
+
+**Customer Data Gap:**  
+Around **135,080 transactions (~25% of total data)** are missing `CustomerID`, limiting customer-level analysis.  
+→ Improving customer tracking systems can unlock better segmentation, personalization, and retention strategies.
+
+---
+
+**Seasonal Revenue Peaks:**  
+Revenue shows strong spikes during **November and December**, indicating clear holiday-driven demand.  
+→ Businesses should align inventory, marketing campaigns, and operations with Q4 seasonality to maximize performance.
+
+---
+
+**High Return Rates in Specific Countries:**  
+Certain countries exhibit noticeably higher return rates compared to others.  
+→ This may indicate logistics issues, product mismatches, or unmet customer expectations that require localized improvements.
+
+---
+
+**Revenue Concentration (Pareto Effect):**  
+A small group of customers contributes a disproportionately large share of total revenue.  
+→ Focusing on high-value customers through loyalty programs and personalized marketing can significantly boost long-term profitability.
